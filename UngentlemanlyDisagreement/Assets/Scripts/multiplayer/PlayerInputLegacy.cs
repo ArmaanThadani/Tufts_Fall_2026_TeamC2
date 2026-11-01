@@ -35,9 +35,9 @@ public class PlayerInputLegacy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(
-            "Player " + GetComponent<LocalPlayerIdentity>().PlayerID
-            + " movement: " + MoveInput
-        );
+        //Debug.Log(
+        //    "Player " + GetComponent<LocalPlayerIdentity>().PlayerID
+        //    + " movement: " + MoveInput
+        //);
     }
 }
