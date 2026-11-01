@@ -1,56 +1,186 @@
 
+using System.Collections.Generic;
 using UnityEngine;
- 
-// Put this on the Player.
-// Each item needs: a Collider, a Rigidbody, and the tag "Pickup".
+
 public class PickUp : MonoBehaviour
 {
-    public Transform holdPoint;      // empty object in front of the player
-    public float pickUpRange = 2f;   // how close you need to be
-    public KeyCode key = KeyCode.E;
- 
-    Rigidbody held;
- 
-    void Update()
+    [Header("Player Settings")]
+    public int playerNumber = 1;
+    public Transform holdPoint;
+    public float pickUpRange = 2f;
+
+    [Header("Gear Slots")]
+    public int startingSlots = 2;
+
+    private readonly List<Rigidbody> gearSlots =
+        new List<Rigidbody>();
+
+    private int selectedSlot;
+    private float previousDpadX;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(key))
+        for (int i = 0; i < startingSlots; i++)
         {
-            if (held == null) TryPickUp();
-            else Drop();
+            gearSlots.Add(null);
         }
     }
- 
-    void TryPickUp()
+
+    private void Update()
     {
-        // Find the closest "Pickup" item within range
-        Collider[] hits = Physics.OverlapSphere(holdPoint.position, pickUpRange);
-        float closest = Mathf.Infinity;
- 
+        HandleSlotSwitching();
+
+        KeyCode pickupButton = (KeyCode)(
+            (int)KeyCode.Joystick1Button0
+            + (playerNumber - 1) * 20
+        );
+
+        if (Input.GetKeyDown(pickupButton))
+        {
+            if (gearSlots[selectedSlot] != null)
+                Drop();
+            else
+                TryPickUp();
+        }
+    }
+
+    private void HandleSlotSwitching()
+    {
+        float dpadX = Input.GetAxisRaw(
+            "DPadHorizontal_P" + playerNumber
+        );
+
+        if (dpadX < -0.5f && previousDpadX >= -0.5f)
+            SelectPreviousSlot();
+
+        if (dpadX > 0.5f && previousDpadX <= 0.5f)
+            SelectNextSlot();
+
+        previousDpadX = dpadX;
+    }
+
+    private void TryPickUp()
+    {
+        if (holdPoint == null)
+        {
+            Debug.LogError("Hold Point is not assigned!", this);
+            return;
+        }
+
+        Collider[] hits = Physics.OverlapSphere(
+            holdPoint.position,
+            pickUpRange
+        );
+
+        Rigidbody closest = null;
+        float closestDistance = Mathf.Infinity;
+
         foreach (Collider hit in hits)
         {
-            if (!hit.CompareTag("Pickup") || hit.attachedRigidbody == null) continue;
- 
-            float d = Vector3.Distance(holdPoint.position, hit.transform.position);
-            if (d < closest)
+            if (!hit.CompareTag("Pickup"))
+                continue;
+
+            Rigidbody item = hit.attachedRigidbody;
+
+            if (item == null)
+                continue;
+
+            float distance = Vector3.Distance(
+                holdPoint.position,
+                item.position
+            );
+
+            if (distance < closestDistance)
             {
-                closest = d;
-                held = hit.attachedRigidbody;
+                closestDistance = distance;
+                closest = item;
             }
         }
- 
-        if (held == null) return;
- 
-        // Stick it to the hold point
-        held.isKinematic = true;
-        held.transform.SetParent(holdPoint);
-        held.transform.localPosition = Vector3.zero;
-        held.transform.localRotation = Quaternion.identity;
+
+        if (closest == null)
+            return;
+
+        StoreItem(closest);
     }
- 
-    void Drop()
+
+    public bool StoreItem(Rigidbody item)
     {
-        held.transform.SetParent(null);
-        held.isKinematic = false;   // physics takes over again
-        held = null;
+        if (item == null || gearSlots[selectedSlot] != null)
+            return false;
+
+        gearSlots[selectedSlot] = item;
+
+        item.isKinematic = true;
+        item.transform.SetParent(holdPoint);
+        item.transform.localPosition = Vector3.zero;
+        item.transform.localRotation = Quaternion.identity;
+
+        Debug.Log(
+            name + " stored " + item.name +
+            " in slot " + (selectedSlot + 1)
+        );
+
+        return true;
+    }
+
+    private void Drop()
+    {
+        Rigidbody item = gearSlots[selectedSlot];
+
+        if (item == null)
+            return;
+
+        item.transform.SetParent(null);
+        item.isKinematic = false;
+
+        gearSlots[selectedSlot] = null;
+    }
+
+    public void SelectNextSlot()
+    {
+        selectedSlot = (selectedSlot + 1) % gearSlots.Count;
+        UpdateHeldItem();
+    }
+
+    public void SelectPreviousSlot()
+    {
+        selectedSlot--;
+
+        if (selectedSlot < 0)
+            selectedSlot = gearSlots.Count - 1;
+
+        UpdateHeldItem();
+    }
+
+    private void UpdateHeldItem()
+    {
+        for (int i = 0; i < gearSlots.Count; i++)
+        {
+            Rigidbody item = gearSlots[i];
+
+            if (item == null)
+                continue;
+
+            if (i == selectedSlot)
+            {
+                item.transform.SetParent(holdPoint);
+                item.transform.localPosition = Vector3.zero;
+                item.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                // Stow inactive gear on the player for now.
+                item.transform.SetParent(transform);
+                item.transform.localPosition =
+                    new Vector3(0f, -100f, 0f);
+            }
+        }
+
+        Debug.Log("Selected gear slot " + (selectedSlot + 1));
+    }
+
+    public void AddGearSlot()
+    {
+        gearSlots.Add(null);
     }
 }
