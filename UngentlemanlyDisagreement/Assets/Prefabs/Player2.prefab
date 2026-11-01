@@ -123,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8528626564045244806}
+  - component: {fileID: 8527385789326890017}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -147,6 +148,18 @@ Transform:
   - {fileID: 4743708745080581024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8527385789326890017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467205166624466692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70efc548750254c9c820dd4054db7ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetGroupAutoRegister
 --- !u!1 &9178740940945492069
 GameObject:
   m_ObjectHideFlags: 0
