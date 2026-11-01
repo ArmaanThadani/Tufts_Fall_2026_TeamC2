@@ -32,4 +32,12 @@ public class PlayerInputLegacy : MonoBehaviour
 
     public bool UseItemPressed =>
         GamepadBackend.GetButtonDown(controllerSlot, 5);
+
+    private void Update()
+    {
+        Debug.Log(
+            "Player " + GetComponent<LocalPlayerIdentity>().PlayerID
+            + " movement: " + MoveInput
+        );
+    }
 }
