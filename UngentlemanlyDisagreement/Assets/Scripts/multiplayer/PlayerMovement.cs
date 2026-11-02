@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int controllerSlot = 1;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float groundCheckDistance = 0.15f;
 
     private Rigidbody rb;
@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = velocity;
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+			//rb.linearVelocity = Vector3.up * jumpForce;
         }
 
         jumpPressed = false;

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -6471742634379465455}
   - component: {fileID: 1695460932844474138}
   - component: {fileID: 6604013090763534503}
+  - component: {fileID: 3666685861719959429}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3062953755708817196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fbd03d0599dda3418739a720443268c, type: 3}
   m_Name: 
@@ -178,6 +179,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70efc548750254c9c820dd4054db7ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetGroupAutoRegister
+--- !u!114 &3666685861719959429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062953755708817196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dddb53565778e408be7f27cb3f8b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBetterFall
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  controllerSlot: 1
 --- !u!1 &5309353010777066472
 GameObject:
   m_ObjectHideFlags: 0
