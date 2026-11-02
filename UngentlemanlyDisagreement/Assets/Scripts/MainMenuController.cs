@@ -4,10 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+
     public void StartGame()
     {
-        SceneManager.LoadScene("ControllerLobby");
+        Debug.Log("MAIN MENU START BUTTON CLICKED!");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ControllerLobby");
     }
+
 
     public void QuitGame()
     {

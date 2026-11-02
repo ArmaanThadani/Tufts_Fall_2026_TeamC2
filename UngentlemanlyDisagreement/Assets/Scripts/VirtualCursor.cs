@@ -2,121 +2,86 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 public class VirtualCursor : MonoBehaviour
 {
-    [SerializeField] private RectTransform cursor;
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private float cursorSpeed = 700f;
-    [SerializeField] private int controllerSlot = 1;
+    [Header("Cursor Settings")]
+    public RectTransform cursor;
+    public Canvas canvas;
+    public float cursorSpeed = 700f;
+    public int controllerSlot = 1;
 
     private GraphicRaycaster raycaster;
     private EventSystem eventSystem;
-    private PointerEventData pointerData;
-    private GameObject hoveredObject;
 
-    private void Awake()
+    void Awake()
     {
-        raycaster = canvas.GetComponent<GraphicRaycaster>();
-        eventSystem = EventSystem.current;
+        if (canvas != null)
+            raycaster = canvas.GetComponent<GraphicRaycaster>();
 
-        if (eventSystem != null)
-            pointerData = new PointerEventData(eventSystem);
+        eventSystem = EventSystem.current;
     }
 
-    private void Update()
+    void Update()
     {
-        if (cursor == null || canvas == null ||
-            raycaster == null || eventSystem == null)
+        if (cursor == null || canvas == null)
             return;
 
-        string horizontalAxis = "Horizontal_P" + controllerSlot;
-        string verticalAxis = "Vertical_P" + controllerSlot;
+        float x = Input.GetAxis("Horizontal_P" + controllerSlot);
+        float y = Input.GetAxis("Vertical_P" + controllerSlot);
 
-        float x = Input.GetAxisRaw(horizontalAxis);
-        float y = Input.GetAxisRaw(verticalAxis);
+        cursor.anchoredPosition += new Vector2(x, y)
+            * cursorSpeed * Time.unscaledDeltaTime;
 
-        Vector2 position = cursor.position;
-        position += new Vector2(x, y) *
-                    cursorSpeed * Time.unscaledDeltaTime;
+        RectTransform canvasRect =
+            canvas.GetComponent<RectTransform>();
 
-        position.x = Mathf.Clamp(position.x, 0, Screen.width);
-        position.y = Mathf.Clamp(position.y, 0, Screen.height);
-
-        cursor.position = position;
-
-        UpdateHover();
+        cursor.anchoredPosition = new Vector2(
+            Mathf.Clamp(cursor.anchoredPosition.x,
+                canvasRect.rect.xMin, canvasRect.rect.xMax),
+            Mathf.Clamp(cursor.anchoredPosition.y,
+                canvasRect.rect.yMin, canvasRect.rect.yMax)
+        );
 
         KeyCode aButton = (KeyCode)(
-            (int)KeyCode.Joystick1Button0 +
-            (controllerSlot - 1) * 20
+            (int)KeyCode.Joystick1Button0
+            + (controllerSlot - 1) * 20
         );
 
         if (Input.GetKeyDown(aButton))
-            ClickHoveredObject();
+            ClickUI();
     }
 
-    private void UpdateHover()
+    void ClickUI()
     {
-        pointerData.position = cursor.position;
-
-        List<RaycastResult> results =
-            new List<RaycastResult>();
-
-        raycaster.Raycast(pointerData, results);
-
-        GameObject newHover = results.Count > 0
-            ? results[0].gameObject
-            : null;
-
-        if (newHover == hoveredObject)
-            return;
-
-        if (hoveredObject != null)
+        if (raycaster == null || eventSystem == null)
         {
-            ExecuteEvents.Execute(
-                hoveredObject,
-                pointerData,
-                ExecuteEvents.pointerExitHandler
+            Debug.LogWarning(
+                "VirtualCursor: Missing GraphicRaycaster or EventSystem."
             );
+            return;
         }
 
-        hoveredObject = newHover;
+        PointerEventData pointer = new PointerEventData(eventSystem);
+        pointer.position = RectTransformUtility.WorldToScreenPoint(
+            canvas.worldCamera, cursor.position
+        );
 
-        if (hoveredObject != null)
+        var results = new System.Collections.Generic.List<RaycastResult>();
+        raycaster.Raycast(pointer, results);
+
+        foreach (RaycastResult result in results)
         {
-            ExecuteEvents.Execute(
-                hoveredObject,
-                pointerData,
-                ExecuteEvents.pointerEnterHandler
-            );
+            Button button = result.gameObject.GetComponentInParent<Button>();
+
+            if (button != null && button.interactable)
+            {
+                button.onClick.Invoke();
+                Debug.Log("Virtual cursor clicked: " + button.name);
+                return;
+            }
         }
-    }
 
-    private void ClickHoveredObject()
-    {
-        if (hoveredObject == null)
-            return;
-
-        pointerData.button = PointerEventData.InputButton.Left;
-
-        ExecuteEvents.Execute(
-            hoveredObject,
-            pointerData,
-            ExecuteEvents.pointerDownHandler
-        );
-
-        ExecuteEvents.Execute(
-            hoveredObject,
-            pointerData,
-            ExecuteEvents.pointerUpHandler
-        );
-
-        ExecuteEvents.Execute(
-            hoveredObject,
-            pointerData,
-            ExecuteEvents.pointerClickHandler
-        );
+        Debug.Log("Virtual cursor: No button found under cursor.");
     }
 }
