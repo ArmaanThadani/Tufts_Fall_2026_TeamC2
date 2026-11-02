@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1150761808377774184}
   - component: {fileID: 3002448788224658271}
   - component: {fileID: -3429166537149623556}
+  - component: {fileID: 3189802928001361914}
   - component: {fileID: -6471742634379465455}
   - component: {fileID: 1695460932844474138}
   - component: {fileID: 6604013090763534503}
@@ -121,8 +122,21 @@ MonoBehaviour:
   playerNumber: 1
   moveSpeed: 5
   rotationSpeed: 360
+  controllerSlot: 1
   jumpForce: 7.5
   groundCheckDistance: 0.15
+--- !u!114 &3189802928001361914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062953755708817196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085760f904c925a45bb4debb8ff4535a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerAssignment
 --- !u!114 &-6471742634379465455
 MonoBehaviour:
   m_ObjectHideFlags: 0

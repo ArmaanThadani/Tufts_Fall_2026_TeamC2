@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 720f;
 
+    [Header("Controller")]
+    [SerializeField] private int controllerSlot = 1;
+
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundCheckDistance = 0.15f;
@@ -16,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool jumpPressed;
+
+    public void SetControllerSlot(int slot)
+    {
+        controllerSlot = slot;
+    }
 
     private void Awake()
     {
@@ -27,15 +35,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        moveInput.x = Input.GetAxis("Horizontal_P" + playerNumber);
-        moveInput.y = Input.GetAxis("Vertical_P" + playerNumber);
+        moveInput.x = Input.GetAxis(
+            "Horizontal_P" + controllerSlot
+        );
+
+        moveInput.y = Input.GetAxis(
+            "Vertical_P" + controllerSlot
+        );
 
         moveInput = Vector2.ClampMagnitude(moveInput, 1f);
 
         // Xbox A button for the assigned controller.
         KeyCode jumpButton = (KeyCode)(
             (int)KeyCode.Joystick1Button0
-            + (playerNumber - 1) * 20
+            + (controllerSlot - 1) * 20
         );
 
         if (Input.GetKeyDown(jumpButton))
@@ -59,7 +72,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (movement.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            Quaternion targetRotation =
+                Quaternion.LookRotation(movement);
 
             Quaternion newRotation = Quaternion.RotateTowards(
                 rb.rotation,
