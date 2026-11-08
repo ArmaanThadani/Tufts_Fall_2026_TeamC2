@@ -15,5 +15,10 @@ public class PlayerControllerAssignment : MonoBehaviour
 
         if (movement != null)
             movement.SetControllerSlot(controllerSlot);
+
+        PlayerCombat combat = GetComponent<PlayerCombat>();
+
+        if (combat != null)
+            combat.SetControllerSlot(controllerSlot);
     }
 }
