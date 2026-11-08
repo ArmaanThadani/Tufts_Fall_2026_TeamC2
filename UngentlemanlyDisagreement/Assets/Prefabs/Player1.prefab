@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
-  knockbackForce: 5
+  knockbackForce: 10
   knockbackUpwardForce: 5
 --- !u!1 &5309353010777066472
 GameObject:

@@ -19,10 +19,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool jumpPressed;
+    private float knockbackTimer;
 
     public void SetControllerSlot(int slot)
     {
         controllerSlot = slot;
+    }
+
+    public void ApplyKnockback(Vector3 force, float duration)
+    {
+        rb.AddForce(force, ForceMode.Impulse);
+        knockbackTimer = duration;
     }
 
     private void Awake()
@@ -66,8 +73,17 @@ public class PlayerMovement : MonoBehaviour
         );
 
         Vector3 velocity = rb.linearVelocity;
-        velocity.x = movement.x * moveSpeed;
-        velocity.z = movement.z * moveSpeed;
+
+        if (knockbackTimer > 0f)
+        {
+            knockbackTimer -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            velocity.x = movement.x * moveSpeed;
+            velocity.z = movement.z * moveSpeed;
+        }
+
         rb.linearVelocity = velocity;
 
         if (movement.sqrMagnitude > 0.01f)

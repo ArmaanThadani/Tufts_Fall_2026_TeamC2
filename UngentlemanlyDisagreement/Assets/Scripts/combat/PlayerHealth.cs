@@ -41,11 +41,16 @@ public class PlayerHealth : MonoBehaviour
         {
             direction.Normalize();
 
-            Vector3 force =
-                direction * knockbackForce
-                + Vector3.up * knockbackUpwardForce;
+            PlayerMovement movement = GetComponent<PlayerMovement>();
 
-            rb.AddForce(force, ForceMode.Impulse);
+            if (movement != null)
+            {
+                Vector3 force =
+                    direction * knockbackForce
+                    + Vector3.up * knockbackUpwardForce;
+
+                movement.ApplyKnockback(force, 0.2f);
+            }
         }
 
         Debug.Log(name + " health: " + currentHealth);
