@@ -8,17 +8,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private int controllerSlot = 1;
     [SerializeField] private float triggerThreshold = 0.5f;
 
-    [Header("Weapon Check")]
-    [SerializeField] private Transform weaponHoldPoint;
-
     [Header("Slap Settings")]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float slapRange = 1.2f;
     [SerializeField] private float slapDamage = 5f;
     [SerializeField] private float slapCooldown = 1f;
 
-    private float nextSlapTime;
+    private PlayerGear playerGear;
+
+    private float nextAttackTime;
     private bool triggerWasPressed;
+
+    private void Awake()
+    {
+        playerGear = GetComponent<PlayerGear>();
+    }
 
     public void SetControllerSlot(int slot)
     {
@@ -43,17 +47,20 @@ public class PlayerCombat : MonoBehaviour
 
     private void TryAttack()
     {
-        if (Time.time < nextSlapTime)
+        if (Time.time < nextAttackTime)
             return;
 
-        // Don't slap if a weapon is being held.
-        if (weaponHoldPoint != null &&
-            weaponHoldPoint.childCount > 0)
+        // If a weapon is equipped, use it.
+        if (playerGear != null && playerGear.HasActiveWeapon())
         {
+            playerGear.UseSelectedWeapon();
+
+            nextAttackTime = Time.time + slapCooldown;
             return;
         }
 
-        nextSlapTime = Time.time + slapCooldown;
+        // Otherwise, perform the basic slap.
+        nextAttackTime = Time.time + slapCooldown;
         Slap();
     }
 
@@ -61,7 +68,9 @@ public class PlayerCombat : MonoBehaviour
     {
         if (attackPoint == null)
         {
-            Debug.LogWarning(name + ": Attack Point is not assigned.");
+            Debug.LogWarning(
+                name + ": Attack Point is not assigned."
+            );
             return;
         }
 
