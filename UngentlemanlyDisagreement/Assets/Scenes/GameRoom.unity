@@ -885,6 +885,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1311929175384055295, guid: 115c659e1623e35439d6b047a38bcc27, type: 3}
+      propertyPath: possibleWeapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311929175384055295, guid: 115c659e1623e35439d6b047a38bcc27, type: 3}
+      propertyPath: 'possibleWeapons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9263574e0db622c489a0c4923881f804, type: 2}
     - target: {fileID: 5868200219267326051, guid: 115c659e1623e35439d6b047a38bcc27, type: 3}
       propertyPath: m_Name
       value: WeaponSpawner

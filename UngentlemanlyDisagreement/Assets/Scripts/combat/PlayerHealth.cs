@@ -19,11 +19,15 @@ public class PlayerHealth : MonoBehaviour
     public float MaxHealth => maxHealth;
     public bool IsDead { get; private set; }
 
+    [SerializeField] private PointsManager pointsManager;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         death = GetComponent<PlayerDeath>();
         currentHealth = maxHealth;
+
+        pointsManager = FindFirstObjectByType<PointsManager>();
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection)
@@ -59,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         {
             IsDead = true;
 
+            pointsManager.deathPoints(gameObject.name);
             if (death != null)
                 death.Die(hitDirection);
         }
