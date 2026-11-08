@@ -27,7 +27,10 @@ public class PlayerHealth : MonoBehaviour
         death = GetComponent<PlayerDeath>();
         currentHealth = maxHealth;
 
-        pointsManager = FindFirstObjectByType<PointsManager>();
+        if (pointsManager == null)
+        {
+            pointsManager = FindFirstObjectByType<PointsManager>();
+        }
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection)
@@ -63,9 +66,21 @@ public class PlayerHealth : MonoBehaviour
         {
             IsDead = true;
 
-            pointsManager.deathPoints(gameObject.name);
+            if (pointsManager != null)
+            {
+                pointsManager.deathPoints(gameObject.name);
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "PointsManager not found! Death points were not recorded."
+                );
+            }
+
             if (death != null)
+            {
                 death.Die(hitDirection);
+            }
         }
     }
 

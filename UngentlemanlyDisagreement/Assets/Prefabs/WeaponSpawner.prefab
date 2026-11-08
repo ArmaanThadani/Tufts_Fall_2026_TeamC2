@@ -261,13 +261,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSpawner
   possibleWeapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c24dc14fb7c65944cac454030e4e2586, type: 2}
+  - {fileID: 11400000, guid: 9263574e0db622c489a0c4923881f804, type: 2}
+  - {fileID: 11400000, guid: f5b2ca3a424293b44a33d15d6c785ef4, type: 2}
   cooldown: 10
   pickupRange: 2
   displayPoint: {fileID: 0}
+  spinSpeed: 90
+  floatHeight: 0.25
+  floatSpeed: 2
 --- !u!1 &6717900093408268504
 GameObject:
   m_ObjectHideFlags: 0
