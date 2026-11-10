@@ -8,11 +8,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private int controllerSlot = 1;
     [SerializeField] private float triggerThreshold = 0.5f;
 
-    [Header("Slap Settings")]
+    [Header("Punch Settings")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float slapRange = 1.2f;
-    [SerializeField] private float slapDamage = 5f;
-    [SerializeField] private float slapCooldown = 1f;
+    [SerializeField] private float punchRange = 1.2f;
+    [SerializeField] private float punchDamage = 5f;
+    [SerializeField] private float attackCooldown = 1f;
 
     private PlayerGear playerGear;
 
@@ -50,21 +50,15 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time < nextAttackTime)
             return;
 
-        // If a weapon is equipped, use it.
+        nextAttackTime = Time.time + attackCooldown;
+
         if (playerGear != null && playerGear.HasActiveWeapon())
-        {
             playerGear.UseSelectedWeapon();
-
-            nextAttackTime = Time.time + slapCooldown;
-            return;
-        }
-
-        // Otherwise, perform the basic slap.
-        nextAttackTime = Time.time + slapCooldown;
-        Slap();
+        else
+            Punch();
     }
 
-    private void Slap()
+    private void Punch()
     {
         if (attackPoint == null)
         {
@@ -76,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
 
         Collider[] hits = Physics.OverlapSphere(
             attackPoint.position,
-            slapRange
+            punchRange
         );
 
         HashSet<PlayerHealth> hitPlayers =
@@ -87,10 +81,7 @@ public class PlayerCombat : MonoBehaviour
             PlayerHealth target =
                 hit.GetComponentInParent<PlayerHealth>();
 
-            if (target == null || target.gameObject == gameObject)
-                continue;
-
-            if (!hitPlayers.Add(target))
+            if (target == null || target.gameObject == gameObject || target.IsDead)
                 continue;
 
             Vector3 direction =
@@ -98,9 +89,16 @@ public class PlayerCombat : MonoBehaviour
 
             direction.y = 0f;
 
-            target.TakeDamage(slapDamage, direction);
+            // Only hit opponents in front of this player.
+            if (Vector3.Dot(transform.forward, direction) <= 0f)
+                continue;
 
-            Debug.Log(name + " slapped " + target.name);
+            if (!hitPlayers.Add(target))
+                continue;
+
+            target.TakeDamage(punchDamage, direction);
+
+            Debug.Log(name + " punched " + target.name);
         }
     }
 
@@ -110,6 +108,6 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPoint.position, slapRange);
+        Gizmos.DrawWireSphere(attackPoint.position, punchRange);
     }
 }

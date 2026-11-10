@@ -332,9 +332,9 @@ MonoBehaviour:
   controllerSlot: 1
   triggerThreshold: 0.5
   attackPoint: {fileID: 1227437676466167925}
-  slapRange: 1.5
-  slapDamage: 5
-  slapCooldown: 1
+  punchRange: 1.5
+  punchDamage: 5
+  attackCooldown: 1
 --- !u!114 &563788742928315945
 MonoBehaviour:
   m_ObjectHideFlags: 0
