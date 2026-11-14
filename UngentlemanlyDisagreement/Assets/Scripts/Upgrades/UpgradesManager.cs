@@ -9,12 +9,14 @@ public class UpgradesManager : MonoBehaviour
 
     void Awake()
     {
-        upgradeCardSpacing = GetComponent<UpgradeCardSpacing>();
+        upgradeCardSpacing = FindFirstObjectByType<UpgradeCardSpacing>();
     }
 
     private void Start() {
+        
         StartUpgradePhase();
     }
+
 
     void StartUpgradePhase() 
     {

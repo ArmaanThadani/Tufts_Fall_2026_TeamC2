@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 901277396389891029}
   - component: {fileID: 206849938782851520}
-  - component: {fileID: 5550994948633395239}
   m_Layer: 0
   m_Name: CardContainer
   m_TagString: Untagged
@@ -45,23 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b394e73bf047944a7bc9d13c00912fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeCardSpacing
-  cardPrefab: {fileID: 7753428411670681062}
+  cardPrefab: {fileID: 300390803809846697, guid: 5f089cb61131f4ce38b03b0e25a6a0aa, type: 3}
   cardWidth: 200
   cardHeight: 300
   spacing: 20
---- !u!114 &5550994948633395239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6522178456793718684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42cc459eb2ef448af94bec6fb2cbe17b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradesManager
-  upgradesDatabase: {fileID: 11400000, guid: 1e1e04486bd3a43df93f1ba927c4408a, type: 2}
+  maxCardsPerRow: 5
 --- !u!1 &7753428411670681062
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

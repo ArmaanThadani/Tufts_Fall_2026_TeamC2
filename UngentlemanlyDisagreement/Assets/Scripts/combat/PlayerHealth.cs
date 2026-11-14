@@ -4,27 +4,29 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Health")]
-    [SerializeField] private float maxHealth = 100f;
-
-    [Header("Knockback")]
-    [SerializeField] private float knockbackForce = 5f;
-    [SerializeField] private float knockbackUpwardForce = 1.5f;
+    private float maxHealth;
+    private float knockbackForce;
+    private float knockbackUpwardForce;
 
     private float currentHealth;
     private Rigidbody rb;
     private PlayerDeath death;
-
-    public float CurrentHealth => currentHealth;
-    public float MaxHealth => maxHealth;
     public bool IsDead { get; private set; }
 
     [SerializeField] private PointsManager pointsManager;
 
+    private PlayerStats stats;
+
     private void Awake()
     {
+        stats = GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody>();
         death = GetComponent<PlayerDeath>();
+
+        maxHealth = stats.maxHealth;
+        knockbackForce = stats.knockbackForce;
+        knockbackUpwardForce = stats.knockbackUpwardForce;
+
         currentHealth = maxHealth;
 
         if (pointsManager == null)

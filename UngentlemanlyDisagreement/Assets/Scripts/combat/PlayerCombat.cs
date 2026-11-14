@@ -10,17 +10,25 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Punch Settings")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float punchRange = 1.2f;
-    [SerializeField] private float punchDamage = 5f;
-    [SerializeField] private float attackCooldown = 1f;
+    private float punchRange;
+    private float punchDamage;
+    private float attackCooldown;
 
     private PlayerGear playerGear;
 
     private float nextAttackTime;
     private bool triggerWasPressed;
 
+    private PlayerStats stats;
+
     private void Awake()
     {
+        stats = GetComponent<PlayerStats>();
+
+        punchRange = stats.punchRange;
+        punchDamage = stats.punchDamage;
+        attackCooldown = stats.attackCooldown;
+
         playerGear = GetComponent<PlayerGear>();
     }
 

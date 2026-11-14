@@ -11,8 +11,12 @@ public class UpgradeCardSpacing : MonoBehaviour
     public float spacing = 20f; //spacing between cards
     public int maxCardsPerRow = 5;
 
+    private PlayerStatsHandler statsHandler;
+
     private void Awake() 
     {
+        statsHandler = FindFirstObjectByType<PlayerStatsHandler>();
+
         cardContainer = transform; //own game object's transform
     }
     public void SpawnAndCenterCards(List<UpgradeCardStats> cards)
@@ -25,7 +29,7 @@ public class UpgradeCardSpacing : MonoBehaviour
         if (totalCards == 0) 
             return;
 
-
+        //math to make card go into another row when exceeding width
         int totalRows = Mathf.CeilToInt((float)totalCards / maxCardsPerRow);
         float totalBlockHeight = 
             (totalRows * cardHeight) + ((totalRows - 1) * spacing);
@@ -38,6 +42,7 @@ public class UpgradeCardSpacing : MonoBehaviour
 
         for (int r = 0; r < totalRows; r++)
         {
+            //math to make cards spaced in row
             int cardsInThisRow = Mathf.Min(maxCardsPerRow, totalCards - cardIndex);
 
             float rowWidth = (cardsInThisRow * cardWidth) + 
@@ -56,8 +61,22 @@ public class UpgradeCardSpacing : MonoBehaviour
                 rect.anchoredPosition = new Vector2(xPos, yPos);
                 rect.sizeDelta = new Vector2(cardWidth, cardHeight);
 
-                //changing the title of card
-                cardObj.GetComponent<CardUI>().Initialize(cards[cardIndex]);
+                //adding data to card
+                CardUI cardUI = cardObj.GetComponent<CardUI>();
+                if (cardUI != null)
+                {
+                    //what happens when card gets clicked
+                    cardUI.Initialize(cards[cardIndex], (clickedCardData) => {
+                        
+                        Debug.Log("Player selected card: " + 
+                            clickedCardData.cardName);
+                        
+                        //Apply the upgrade to the player here
+                        statsHandler.ApplyUpgradeToPlayer(0, clickedCardData);
+                        
+                        Debug.Log("I got here!");
+                    });
+                }
 
                 //Add Card images here
                 

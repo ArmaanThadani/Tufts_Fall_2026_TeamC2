@@ -6,20 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] private int playerNumber = 1;
-    [SerializeField] private float moveSpeed = 5f;
+    private float moveSpeed;
     [SerializeField] private float rotationSpeed = 720f;
 
     [Header("Controller")]
     [SerializeField] private int controllerSlot = 1;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 50f;
+    private float jumpForce;
     [SerializeField] private float groundCheckDistance = 0.15f;
 
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool jumpPressed;
     private float knockbackTimer;
+
+    private PlayerStats stats;
 
     public void SetControllerSlot(int slot)
     {
@@ -34,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        stats = GetComponent<PlayerStats>();
+
+        jumpForce = stats.jumpForce;
+        moveSpeed = stats.moveSpeed;
+
         rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.FreezeRotationX

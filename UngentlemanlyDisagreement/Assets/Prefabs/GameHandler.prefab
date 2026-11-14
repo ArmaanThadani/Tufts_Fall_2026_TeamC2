@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3078540753286458014}
   - component: {fileID: 1035089506573278948}
   - component: {fileID: 3000060964308929799}
+  - component: {fileID: 2304933637218827496}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -57,4 +58,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d997e62438227427093e4d08751fffdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointsManager
-  player1: {fileID: 0}
+--- !u!114 &2304933637218827496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306267397828682409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cc459eb2ef448af94bec6fb2cbe17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradesManager
+  upgradesDatabase: {fileID: 11400000, guid: 1e1e04486bd3a43df93f1ba927c4408a, type: 2}
