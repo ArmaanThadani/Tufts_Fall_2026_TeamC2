@@ -6,14 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] private int playerNumber = 1;
-    private float moveSpeed;
+    public float moveSpeed;
     [SerializeField] private float rotationSpeed = 720f;
 
     [Header("Controller")]
     [SerializeField] private int controllerSlot = 1;
 
     [Header("Jump Settings")]
-    private float jumpForce;
+    public float jumpForce;
     [SerializeField] private float groundCheckDistance = 0.15f;
 
     private Rigidbody rb;
