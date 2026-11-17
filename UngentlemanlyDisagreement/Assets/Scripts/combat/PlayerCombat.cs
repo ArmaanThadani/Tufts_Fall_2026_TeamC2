@@ -19,6 +19,9 @@ public class PlayerCombat : MonoBehaviour
     private float nextAttackTime;
     private bool triggerWasPressed;
 
+    public bool CanPunch => isActiveAndEnabled && Time.time >= nextAttackTime &&
+        (playerGear == null || !playerGear.HasActiveWeapon());
+
     private PlayerStats stats;
 
     private void Awake()
@@ -76,6 +79,8 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
+        Debug.Log(name + " punched!");
+
         Collider[] hits = Physics.OverlapSphere(
             attackPoint.position,
             punchRange
@@ -106,7 +111,7 @@ public class PlayerCombat : MonoBehaviour
 
             target.TakeDamage(punchDamage, direction);
 
-            Debug.Log(name + " punched " + target.name);
+            Debug.Log(name + " hit " + target.name);
         }
     }
 
