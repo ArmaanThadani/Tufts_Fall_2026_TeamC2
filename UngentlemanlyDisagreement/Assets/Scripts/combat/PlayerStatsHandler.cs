@@ -1,18 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[DefaultExecutionOrder(-100)]
 public class PlayerStatsHandler : MonoBehaviour
 {
-    public List<PlayerStats> playerStats;
+    public static List<PlayerStats> playerStats = new List<PlayerStats>();
 
     private void Awake() 
     {
-        FindAllPlayers();
-    }
-    public void FindAllPlayers()
-    {
-        playerStats = new List<PlayerStats>(FindObjectsByType<PlayerStats>(FindObjectsSortMode.None));
-        Debug.Log("PlayerStatsHandler found " + playerStats.Count + " players");
+        if (playerStats.Count != 0) {
+            return;
+        }
+
+        for (int i = 0; i < 4/*GameSession.JoinedControllerSlots.Count*/; i++) 
+        {
+            playerStats.Add(new PlayerStats());
+            playerStats[i].playerNumber = i + 1;
+        }
+
+        DontDestroyOnLoad(gameObject); 
     }
 
     public void ApplyUpgradeToPlayer(int playerIndex, UpgradeCardStats cardData)

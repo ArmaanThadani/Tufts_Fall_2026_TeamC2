@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        stats = GetComponent<PlayerStats>();
+        stats = PlayerStatsHandler.playerStats[0];//for testing
 
         jumpForce = stats.jumpForce;
         moveSpeed = stats.moveSpeed;

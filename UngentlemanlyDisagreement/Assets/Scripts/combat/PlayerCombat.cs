@@ -26,7 +26,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
-        stats = GetComponent<PlayerStats>();
+        stats = PlayerStatsHandler.playerStats[0];//for testing
 
         punchRange = stats.punchRange;
         punchDamage = stats.punchDamage;
