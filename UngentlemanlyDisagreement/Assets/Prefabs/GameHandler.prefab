@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1035089506573278948}
   - component: {fileID: 3000060964308929799}
   - component: {fileID: 2304933637218827496}
+  - component: {fileID: 9212022734498538995}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -71,3 +72,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradesManager
   upgradesDatabase: {fileID: 11400000, guid: 1e1e04486bd3a43df93f1ba927c4408a, type: 2}
+--- !u!114 &9212022734498538995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306267397828682409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146a1b8ab5fcf42e38f27f1ead9ed96f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsHandler

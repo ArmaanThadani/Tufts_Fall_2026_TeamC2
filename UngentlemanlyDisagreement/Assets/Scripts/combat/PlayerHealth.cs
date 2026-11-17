@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        stats = GetComponent<PlayerStats>();
+        stats = PlayerStatsHandler.playerStats[0];//for testing
         rb = GetComponent<Rigidbody>();
         death = GetComponent<PlayerDeath>();
 

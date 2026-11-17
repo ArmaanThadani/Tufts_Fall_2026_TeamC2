@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 7455193849245874591}
   - component: {fileID: 563788742928315945}
   - component: {fileID: 9148561841302428122}
-  - component: {fileID: 4595531864369360558}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -239,8 +238,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   playerNumber: 1
+  moveSpeed: 0
   rotationSpeed: 360
   controllerSlot: 1
+  jumpForce: 0
   groundCheckDistance: 0.15
 --- !u!114 &3189802928001361914
 MonoBehaviour:
@@ -358,28 +359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   pointsManager: {fileID: 0}
---- !u!114 &4595531864369360558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062953755708817196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9ac26b6117a47cfab0eef761f21eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  playerNumber: 0
-  maxHealth: 100
-  knockbackForce: 5
-  knockbackUpwardForce: 1.5
-  moveSpeed: 5
-  jumpForce: 50
-  punchRange: 1.2
-  punchDamage: 5
-  attackCooldown: 1
-  playerUpgrades: []
 --- !u!1 &5309353010777066472
 GameObject:
   m_ObjectHideFlags: 0

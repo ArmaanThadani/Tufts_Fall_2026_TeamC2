@@ -9,17 +9,19 @@ public class UpgradesManager : MonoBehaviour
 
     void Awake()
     {
-        upgradeCardSpacing = FindFirstObjectByType<UpgradeCardSpacing>();
+        
     }
 
     private void Start() {
         
-        StartUpgradePhase();
+        //StartUpgradePhase();
     }
 
 
     void StartUpgradePhase() 
     {
+        upgradeCardSpacing = FindFirstObjectByType<UpgradeCardSpacing>();
+        
         List<UpgradeCardStats> cards = GetRandomUpgradeCards(9);
         upgradeCardSpacing.SpawnAndCenterCards(cards);
 

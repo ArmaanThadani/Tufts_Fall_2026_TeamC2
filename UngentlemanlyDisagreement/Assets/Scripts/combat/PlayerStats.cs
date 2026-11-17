@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerStats : MonoBehaviour
+[System.Serializable]
+public class PlayerStats
 {
     public int playerNumber;
+
+    public int points = 0;
 
     [Header("Health")]
     public float maxHealth = 100f;
