@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[System.Serializable]
 public class PlayerStats
 {
     public int playerNumber;
@@ -44,7 +43,6 @@ public class PlayerStats
 
             case UpgradeType.MaxHealth:
                 maxHealth += cardData.upgradeValue1;
-                // Optional: If you track current health, you could increase it here too!
                 break;
 
             default:

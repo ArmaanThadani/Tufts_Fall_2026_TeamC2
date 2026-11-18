@@ -70,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (pointsManager != null)
             {
-                pointsManager.deathPoints(gameObject.name);
+                pointsManager.deathPoints(stats.points);
             }
             else
             {

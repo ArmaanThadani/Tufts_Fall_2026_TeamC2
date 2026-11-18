@@ -924,62 +924,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.166103e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0043300693
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.007499695
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9659258
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.25881913
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -5.902419e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703630918111345324, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1.581549e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4148467403856619782, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4148467403856619782, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9659258
-      objectReference: {fileID: 0}
-    - target: {fileID: 4148467403856619782, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.25881913
-      objectReference: {fileID: 0}
-    - target: {fileID: 4148467403856619782, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -5.985763e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4148467403856619782, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1.8925911e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593248317190115562, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: FollowOffset.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4593248317190115562, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: TrackerSettings.BindingMode
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4744267638525472962, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1024,24 +968,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6676944668094973450, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: Composition.ScreenPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6676944668094973450, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: Composition.HardLimits.Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8238904419003195901, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: field of view
-      value: 60.001423
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460893992291269249, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
-      propertyPath: Targets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6676944668094973450, guid: f9645ed65128d47ea85894d9ec14ec9b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
