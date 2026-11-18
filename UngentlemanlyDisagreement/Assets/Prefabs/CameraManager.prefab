@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4148467403856619782}
   - component: {fileID: 8336466968514121269}
   - component: {fileID: 4593248317190115562}
-  - component: {fileID: 6676944668094973450}
   - component: {fileID: 8842670194035320396}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2294511119696866756}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalRotation: {x: 0.25881913, y: -5.985763e-15, z: 1.8925911e-15, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -91,41 +90,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
   TrackerSettings:
-    BindingMode: 4
+    BindingMode: 5
     PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
---- !u!114 &6676944668094973450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2294511119696866756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
-  Composition:
-    ScreenPosition: {x: 0, y: -1.5}
-    DeadZone:
-      Enabled: 0
-      Size: {x: 0.2, y: 0.2}
-    HardLimits:
-      Enabled: 0
-      Size: {x: 0.8, y: 0.8}
-      Offset: {x: 0, y: 0}
-  CenterOnActivate: 0
-  TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
-  Lookahead:
-    Enabled: 0
-    Time: 0
-    Smoothing: 0
-    IgnoreY: 0
 --- !u!114 &8842670194035320396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,8 +145,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5953676906990266644}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.86602545}
-  m_LocalPosition: {x: 0, y: 0.0074992287, z: -0.0043287277}
+  m_LocalRotation: {x: 0.25881913, y: -5.902419e-15, z: 1.581549e-15, w: 0.9659258}
+  m_LocalPosition: {x: 9.166103e-17, y: 0.0043300693, z: -0.007499695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,7 +185,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.004154
+  field of view: 60.001423
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -399,10 +369,7 @@ MonoBehaviour:
   PositionMode: 0
   RotationMode: 0
   UpdateMethod: 2
-  Targets:
-  - Object: {fileID: 0}
-    Weight: 1
-    Radius: 0.5
+  Targets: []
   m_LegacyTargets: []
 --- !u!114 &7563874384550921487
 MonoBehaviour:
