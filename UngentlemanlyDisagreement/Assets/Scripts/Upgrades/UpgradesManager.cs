@@ -17,7 +17,6 @@ public class UpgradesManager : MonoBehaviour
         //StartUpgradePhase();
     }
 
-
     void StartUpgradePhase() 
     {
         upgradeCardSpacing = FindFirstObjectByType<UpgradeCardSpacing>();

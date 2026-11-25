@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerStats stats;
 
+    private float vertical = 1f;
+
+    
     public void SetControllerSlot(int slot)
     {
         controllerSlot = slot;
@@ -36,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        float vertical = Input.GetAxis("JoystickVertical");
+
         stats = PlayerStatsHandler.playerStats[0];//for testing
 
         jumpForce = stats.jumpForce;
@@ -45,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
 
         rb.constraints = RigidbodyConstraints.FreezeRotationX
                        | RigidbodyConstraints.FreezeRotationZ;
+
+
+        #if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+            vertical = -1f;
+        #endif
     }
 
     private void Update()
