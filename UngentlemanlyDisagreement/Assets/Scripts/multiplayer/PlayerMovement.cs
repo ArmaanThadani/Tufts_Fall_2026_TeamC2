@@ -99,8 +99,9 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
-        if (movement.sqrMagnitude > 0.1f)
+        if (movement.sqrMagnitude > 0.01f)
         {
+            
             Quaternion targetRotation =
                 Quaternion.LookRotation(movement);
 
@@ -110,8 +111,8 @@ public class PlayerMovement : MonoBehaviour
                 rotationSpeed * Time.fixedDeltaTime
             );
 
-
             rb.MoveRotation(newRotation);
+
         }
 
         if (jumpPressed && IsGrounded())
