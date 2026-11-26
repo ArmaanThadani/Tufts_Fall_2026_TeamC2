@@ -22,9 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private float knockbackTimer;
 
     private PlayerStats stats;
-
-    private float vertical = 1f;
-
     
     public void SetControllerSlot(int slot)
     {
@@ -39,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        float vertical = Input.GetAxis("JoystickVertical");
 
         stats = PlayerStatsHandler.playerStats[0];//for testing
 
@@ -51,10 +47,6 @@ public class PlayerMovement : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX
                        | RigidbodyConstraints.FreezeRotationZ;
 
-
-        //#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-            //vertical = -1f;
-        //#endif
     }
 
     private void Update()
@@ -66,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
         moveInput.y = Input.GetAxis(
             "Vertical_P" + controllerSlot
         );
+
+        #if !(UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX || UNITY_WEBGL)
+            moveInput.y = - moveInput.y;
+        #endif
 
         moveInput = Vector2.ClampMagnitude(moveInput, 1f);
 
@@ -103,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
-        if (movement.sqrMagnitude > 0.01f)
+        if (movement.sqrMagnitude > 0.1f)
         {
             Quaternion targetRotation =
                 Quaternion.LookRotation(movement);
@@ -113,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 targetRotation,
                 rotationSpeed * Time.fixedDeltaTime
             );
+
 
             rb.MoveRotation(newRotation);
         }
