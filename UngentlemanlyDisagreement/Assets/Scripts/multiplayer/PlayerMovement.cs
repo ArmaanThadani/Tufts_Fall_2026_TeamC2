@@ -52,9 +52,9 @@ public class PlayerMovement : MonoBehaviour
                        | RigidbodyConstraints.FreezeRotationZ;
 
 
-        #if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-            vertical = -1f;
-        #endif
+        //#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+            //vertical = -1f;
+        //#endif
     }
 
     private void Update()
